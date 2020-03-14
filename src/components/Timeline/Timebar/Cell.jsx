@@ -1,11 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Cell = ({ time, title, start, end }) => (
-  <div className="rt-timebar__cell" style={time.toStyleLeftAndWidth(start, end)}>
-    {title}
-  </div>
-)
+const Cell = ({ time, title, start, end }) => {
+  const daysArray = []
+  for (let day = start; day <= end; day += 1) {
+    daysArray.push(day)
+  }
+  return (
+    <div className="rt-timebar__cell" style={time.toStyleLeftAndWidth(start, end)}>
+      {title}
+      {daysArray.map(day => (
+        <div className="rt-timebar__day" >
+          {day}
+        </div>
+      ))}
+    </div>
+  )
+}
 
 Cell.propTypes = {
   time: PropTypes.shape({
